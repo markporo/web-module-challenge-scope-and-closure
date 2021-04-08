@@ -183,7 +183,7 @@ function scoreboard(getInningScoreCB, inningCB, numOfInnings,) {
   let overtimeOrNo;
 
   // Recieve random scores using the callback functions.  
-  for (let i = 0; i < numOfInnings.length; i++) {
+  for (let i = 0; i < numOfInnings; i++) {
     const newRandomScore = getInningScoreCB(inningCB);
 
     // Add up Scores based upon the random scores recieved 
@@ -193,20 +193,19 @@ function scoreboard(getInningScoreCB, inningCB, numOfInnings,) {
     finalgameScoreArr.push(`Inning ${i + 1}: Away ${newRandomScore.Away} - Home ${newRandomScore.Home}`);
   }
 
-
   // If the numOf Innings argument is less than, assign strings for unplayed variables; if scores are equal than 
   // write that the game needs extra innings.  If the score is not the same after 9 innings then give final score.
   if (numOfInnings < 9) {
-    for (let i = numOfInnings + 1; i < 9; i++) {
+    for (let i = numOfInnings + 1; i < 10; i++) {
       finalgameScoreArr.push(`Inning ${i}: Not Yet Played`);
     }
   } else if (awayScoreTotal === homeScoreTotal) {
     overtimeOrNo = `This game will require extra innings: Away ${awayScoreTotal} - Home ${homeScoreTotal}`;
+    finalgameScoreArr.push(overtimeOrNo);
   } else {
     overtimeOrNo = `Final Score: Away ${awayScoreTotal} - Home ${homeScoreTotal}`;
+    finalgameScoreArr.push(overtimeOrNo);
   }
-
-  finalgameScoreArr.push(overtimeOrNo);
 
   return finalgameScoreArr;
 }
