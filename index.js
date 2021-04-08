@@ -183,7 +183,7 @@ function scoreboard(getInningScoreCB, inningCB, numOfInnings,) {
 
 
   for (let i = 0; i < numOfInnings.length; i++) {
-    let newScore = { getInningScoreCB(inningCB) };
+    let newScore = getInningScore(inningCB);
     inningsScore.push(newScore);
     console.log(inningsScore, `inning: ${i}`);
   }
@@ -215,18 +215,18 @@ function scoreboard(getInningScoreCB, inningCB, numOfInnings,) {
   console.log(awayScoreAdded, "away score added");
   console.log(homeScoreAdded, "home Score added");
 
-  // let gameArr = [
-  //   `Inning 1: Away ${inningsScore[0].Away} - Home ${inningsScore[0].Home}`,
-  //   `Inning 3: Away ${inningsScore[1].Away} - Home ${inningsScore[1].Home}`,
-  //   `Inning 4: Away ${inningsScore[2].Away} - Home ${inningsScore[2].Home}`,
-  //   `Inning 5: Away ${inningsScore[3].Away} - Home ${inningsScore[3].Home}`,
-  //   `Inning 6: Away ${inningsScore[4].Away} - Home ${inningsScore[4].Home}`,
-  //   `Inning 7: Away ${inningsScore[5].Away} - Home ${inningsScore[5].Home}`,
-  //   `Inning 8: Away ${inningsScore[6].Away} - Home ${inningsScore[6].Home}`,
-  //   `Inning 9: Away ${inningsScore[7].Away} - Home ${inningsScore[7].Home}`,
-  //   `Inning 2: Away ${inningsScore[8].Away} - Home ${inningsScore[8].Home}`,
-  //   overtimeOrNo,
-  // ]
+  let gameArr = [
+    `Inning 1: Away ${inningsScore[0].Away} - Home ${inningsScore[0].Home}`,
+    `Inning 3: Away ${inningsScore[1].Away} - Home ${inningsScore[1].Home}`,
+    `Inning 4: Away ${inningsScore[2].Away} - Home ${inningsScore[2].Home}`,
+    `Inning 5: Away ${inningsScore[3].Away} - Home ${inningsScore[3].Home}`,
+    `Inning 6: Away ${inningsScore[4].Away} - Home ${inningsScore[4].Home}`,
+    `Inning 7: Away ${inningsScore[5].Away} - Home ${inningsScore[5].Home}`,
+    `Inning 8: Away ${inningsScore[6].Away} - Home ${inningsScore[6].Home}`,
+    `Inning 9: Away ${inningsScore[7].Away} - Home ${inningsScore[7].Home}`,
+    `Inning 2: Away ${inningsScore[8].Away} - Home ${inningsScore[8].Home}`,
+    overtimeOrNo,
+  ]
 
   return gameArr;
 }
