@@ -190,24 +190,23 @@ function scoreboard(getInningScoreCB, inningCB, numOfInnings,) {
     awayScoreTotal += newRandomScore.Away;
     homeScoreTotal += newRandomScore.Home;
 
-    finalgameScoreArr.push(`Inning ${i}: Away ${newRandomScore.Away} - Home ${newRandomScore.Home}`);
+    finalgameScoreArr.push(`Inning ${i + 1}: Away ${newRandomScore.Away} - Home ${newRandomScore.Home}`);
   }
 
 
   // If the numOf Innings argument is less than, assign strings for unplayed variables; if scores are equal than 
   // write that the game needs extra innings.  If the score is not the same after 9 innings then give final score.
-  // if (numOfInnings < 9) {
-  //   for (let i = numOfInnings + 1; i < 9; i++) {
-  //     finalgameScoreArr[i].Away = "Has not been played.";
-  //     finalgameScoreArr[i].Home = "Has not been played.";
-  //     overtimeOrNo = (9 - numberOfInnings) + " innings left to be played.";
-  //   }
+  if (numOfInnings < 9) {
+    for (let i = numOfInnings + 1; i < 9; i++) {
+      finalgameScoreArr.push(`Inning ${i}: Not Yet Played`);
+    }
+  } else if (awayScoreTotal === homeScoreTotal) {
+    overtimeOrNo = `This game will require extra innings: Away ${awayScoreTotal} - Home ${homeScoreTotal}`;
+  } else {
+    overtimeOrNo = `Final Score: Away ${awayScoreTotal} - Home ${homeScoreTotal}`;
+  }
 
-  // } else if (awayScoreTotal === homeScoreTotal) {
-  //   overtimeOrNo = `This game will require extra innings: Away ${awayScoreTotal} - Home ${homeScoreTotal}`;
-  // } else {
-  //   overtimeOrNo = `Final Score: Away ${awayScoreTotal} - Home ${homeScoreTotal}`;
-  // }
+  finalgameScoreArr.push(overtimeOrNo);
 
   return finalgameScoreArr;
 }
