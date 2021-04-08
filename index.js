@@ -124,7 +124,7 @@ Use the getInningScore() function below to do the following:
   1. Receive a callback function - you will pass in the inning function from task 2 as your argument 
   2. Return an object with a score for home and a score for away that populates from invoking the inning callback function */
 
-function getInningScore(callback,) {
+function getInningScore(callback) {
   let score1 = callback();
   let score2 = callback();
 
@@ -176,59 +176,40 @@ Use the scoreboard function below to do the following:
   */
 
 function scoreboard(getInningScoreCB, inningCB, numOfInnings,) {
-  let inningsScore = [];
-  let awayScoreAdded;
-  let homeScoreAdded;
+  // Defined Variables
+  let finalgameScoreArr = [];
+  let awayScoreTotal = 0;
+  let homeScoreTotal = 0;
   let overtimeOrNo;
 
-
+  // Recieve random scores using the callback functions.  
   for (let i = 0; i < numOfInnings.length; i++) {
-    let newScore = getInningScore(inningCB);
-    inningsScore.push(newScore);
-    console.log(inningsScore, `inning: ${i}`);
+    const newRandomScore = getInningScoreCB(inningCB);
+
+    // Add up Scores based upon the random scores recieved 
+    awayScoreTotal += newRandomScore.Away;
+    homeScoreTotal += newRandomScore.Home;
+
+    finalgameScoreArr.push(`Inning ${i}: Away ${newRandomScore.Away} - Home ${newRandomScore.Home}`);
   }
 
-  console.log(inningsScore);
 
-  for (let i = 0; i < numOfInnings.length; i++) {
-    awayScoreAdded += inningsScore[i].Away;
-    homeScoreAdded += inningScore[i].Home;
-  }
+  // If the numOf Innings argument is less than, assign strings for unplayed variables; if scores are equal than 
+  // write that the game needs extra innings.  If the score is not the same after 9 innings then give final score.
+  // if (numOfInnings < 9) {
+  //   for (let i = numOfInnings + 1; i < 9; i++) {
+  //     finalgameScoreArr[i].Away = "Has not been played.";
+  //     finalgameScoreArr[i].Home = "Has not been played.";
+  //     overtimeOrNo = (9 - numberOfInnings) + " innings left to be played.";
+  //   }
 
-  console.log(inningsScore);
+  // } else if (awayScoreTotal === homeScoreTotal) {
+  //   overtimeOrNo = `This game will require extra innings: Away ${awayScoreTotal} - Home ${homeScoreTotal}`;
+  // } else {
+  //   overtimeOrNo = `Final Score: Away ${awayScoreTotal} - Home ${homeScoreTotal}`;
+  // }
 
-
-  if (numOfInnings < 9) {
-    for (let i = numOfInnings + 1; i < 9; i++) {
-      inningsScore[i].Away = "Has not been played.";
-      inningsScore[i].Home = "Has not been played.";
-      overtimeOrNo = 9 - numberOfInnings + " innings left to be played.";
-    }
-
-  } else if (awayScoreAdded === homeScoreAdded) {
-    overtimeOrNo = `This game will require extra innings: Away ${awayScoreAdded} - Home ${homeScoreAdded}`;
-  } else {
-    overtimeOrNo = `Final Score: Away ${awayScoreAdded} - Home ${homeScoreAdded}`;
-  }
-
-  console.log(overtimeOrNo, "overtime?");
-  console.log(awayScoreAdded, "away score added");
-  console.log(homeScoreAdded, "home Score added");
-
-  let gameArr = [
-    `Inning 1: Away ${inningsScore[0].Away} - Home ${inningsScore[0].Home}`,
-    `Inning 3: Away ${inningsScore[1].Away} - Home ${inningsScore[1].Home}`,
-    `Inning 4: Away ${inningsScore[2].Away} - Home ${inningsScore[2].Home}`,
-    `Inning 5: Away ${inningsScore[3].Away} - Home ${inningsScore[3].Home}`,
-    `Inning 6: Away ${inningsScore[4].Away} - Home ${inningsScore[4].Home}`,
-    `Inning 7: Away ${inningsScore[5].Away} - Home ${inningsScore[5].Home}`,
-    `Inning 8: Away ${inningsScore[6].Away} - Home ${inningsScore[6].Home}`,
-    `Inning 9: Away ${inningsScore[7].Away} - Home ${inningsScore[7].Home}`,
-    `Inning 2: Away ${inningsScore[8].Away} - Home ${inningsScore[8].Home}`,
-    overtimeOrNo,
-  ]
-
-  return gameArr;
+  return finalgameScoreArr;
 }
 
 console.log(scoreboard(getInningScore, inning, 9), "invoking scoreboard");
